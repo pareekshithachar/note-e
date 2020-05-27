@@ -49,17 +49,20 @@ function showNotes() {
   addTit = document.getElementById(addTit);
 
   notesObj.forEach(function (element, index) {
-    html += `<div class="noteCard my-2 mx-3 card" style="width: 18rem; id="done ${index}">
+    html += `<div class="noteCard my-2 mx-3 card" style="width: 18rem; id="bruh">
           <div class="card-body " id="${index}">
           
-            <h5 class="card-title">${titlelist[index]} <a class="right" onclick="doYellow()"><i class="fas fa-bookmark book right"></i></a></h5>
+            <h5 class="card-title">${titlelist[index]} <button type="button" class="btn btn-link right" id="hehe" onclick="doYellow(${index})"><i class="fas fa-bookmark book"  ></i></button></h5>
+            <p></p>
             <hr>
+            <p></p>
+            
             <p class="card-text">${element}</p>
             <button id ="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
             <button id ="${index}" class="btn btn-primary mx-3" onclick="editNote(this.id)">Edit</button>
         </div>
         </div>`;
-  });
+  }); //<i class="fas fa-bookmark book"  ></i>
   let notesElm = document.getElementById("notes");
   if (notesObj.length != 0) {
     notesElm.innerHTML = html;
@@ -133,10 +136,10 @@ del.addEventListener("click", function (d) {
 function editNote(index) {
   let edit = document.getElementById(index);
 
-  let text = `<p class="lead">Edit here:</p>
+  let text = `<h5>Edit here:</h5>
 
   <br/>
-  <textarea class="form-control" id="editcard" rows="4">${notesObj[index]}</textarea>
+  <textarea class="form-control my-0" id="editcard" rows="4">${notesObj[index]}</textarea>
   <p></p>
   <button onclick="end(this.id)" id="${index}" class="btn btn-primary">Save</button>`;
   edit.innerHTML = text;
@@ -155,4 +158,23 @@ function end(index) {
   notesObj[index] = save.value;
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showNotes();
+}
+
+//bookmark
+function doYellow(index) {
+  let yellow = document.getElementById(index);
+  if (yellow.style.backgroundColor == "yellow") {
+    yellow.style.backgroundColor = "white";
+    let but = document.getElementById(index);
+    let but2 = but.getElementsByTagName("button")[0];
+
+    but2.innerHTML = `<i class="fas fa-bookmark"></i>`;
+  } else {
+    yellow.style.backgroundColor = "yellow";
+    let but = document.getElementById(index);
+    let but2 = but.getElementsByTagName("button")[0];
+    console.log(but2);
+
+    but2.innerHTML = `<i class="far fa-bookmark right"></i>`;
+  }
 }

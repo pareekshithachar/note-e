@@ -5,6 +5,10 @@ html {
   float: right !important;
 }
 
-#yellow {
+.yellow {
   background-color: yellow;
+}
+.fa-bookmark {
+  width: 15pt !important;
+  height: 15pt !important;
 }
